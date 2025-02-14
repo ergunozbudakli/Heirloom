@@ -22,3 +22,27 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+
+# production
+/build
+
+# cursor
+.cursor/
+.cursor
+*.cursor
+.cursor/*
+
+# misc
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env
