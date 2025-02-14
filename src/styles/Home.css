@@ -1,0 +1,387 @@
+body {
+  overflow: hidden;
+}
+
+.home {
+  padding-top: 0;
+  background-color: #faf9f6;
+  height: 100vh;
+  overflow: hidden;
+  touch-action: none;
+  scroll-behavior: smooth;
+}
+
+.hero-section,
+.products-section,
+.features-section {
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  scroll-snap-align: start;
+}
+
+.products-section {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  overflow-y: auto;
+  scrollbar-width: none; /* Firefox için */
+  -ms-overflow-style: none; /* IE ve Edge için */
+}
+
+.products-section::-webkit-scrollbar {
+  display: none; /* Chrome, Safari ve Opera için */
+}
+
+.products-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem 2rem 0;
+  padding-top: 95px;
+  min-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  scrollbar-width: none; /* Firefox için */
+  -ms-overflow-style: none; /* IE ve Edge için */
+}
+
+.products-container::-webkit-scrollbar {
+  display: none; /* Chrome, Safari ve Opera için */
+}
+
+.section-header.mobile-only {
+  display: none;
+}
+
+.section-header.desktop-only {
+  position: absolute;
+  left: 2rem;
+  top: 50%;
+  transform: translateY(-50%) rotate(-90deg);
+  transform-origin: left center;
+  z-index: 10;
+  padding: 1rem;
+  text-align: center;
+  margin: 0;
+  background: transparent;
+}
+
+.section-header h2 {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 2.5rem;
+  font-weight: 400;
+  letter-spacing: 3px;
+  color: #1a1a1a;
+  margin: 0;
+  white-space: nowrap;
+}
+
+.section-header p {
+  display: none;
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  flex: 1;
+  padding-left: 10rem;
+  padding-bottom: 0;
+  margin-top: 3rem;
+}
+
+.product-grid-item {
+  min-height: 320px;
+}
+
+.hero-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background-color: #faf9f6;
+  margin-top: 100px;
+}
+
+.hero-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 30%;
+  height: 30%;
+  background-color: #d3d3d3;
+  z-index: 0;
+  border-bottom-right-radius: 100%;
+}
+
+.hero-section::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 30%;
+  height: 30%;
+  background-color: #8b4513;
+  z-index: 0;
+  border-top-left-radius: 100%;
+}
+
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  width: 100%;
+  max-width: 1200px;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-logo {
+  width: 80%;
+  max-width: 800px;
+  height: auto;
+  margin-bottom: 2rem;
+  transition: transform 0.3s ease;
+  mix-blend-mode: multiply;
+}
+
+.hero-logo:hover {
+  transform: scale(1.02);
+}
+
+.hero-subtitle {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 2rem;
+  color: #1a1a1a;
+  margin-top: 2rem;
+  text-align: center;
+  font-weight: 400;
+  letter-spacing: 3px;
+  opacity: 0.9;
+}
+
+.logo-large {
+  margin-bottom: 3rem;
+}
+
+.candle-circle-large {
+  width: 80px;
+  height: 80px;
+  border: 2px solid #333;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem;
+}
+
+.candle-icon-large {
+  font-size: 2.5rem;
+}
+
+.hero-content h1 {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 4rem;
+  margin-bottom: 0.5rem;
+  letter-spacing: 4px;
+  font-weight: 400;
+}
+
+.subtitle {
+  font-size: 1.5rem;
+  color: #666;
+  margin-bottom: 1rem;
+  font-family: "Cormorant Garamond", serif;
+}
+
+.year {
+  font-family: "Cormorant Garamond", serif;
+  letter-spacing: 8px;
+  color: #666;
+  margin-bottom: 2rem;
+}
+
+.hero-text {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.8rem;
+  color: #333;
+  letter-spacing: 2px;
+  line-height: 1.8;
+}
+
+.about-section {
+  padding: 6rem 2rem;
+  text-align: center;
+  background-color: #fff;
+}
+
+.about-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.about-content h2 {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  font-weight: 400;
+  letter-spacing: 2px;
+}
+
+.about-content p {
+  font-size: 1.2rem;
+  color: #666;
+  line-height: 1.8;
+}
+
+/* Features Section */
+.features-section {
+  padding: 6rem 2rem;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 3rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.feature {
+  text-align: center;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.feature h3 {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  font-weight: 400;
+  color: #1a1a1a;
+}
+
+.feature p {
+  font-size: 1.1rem;
+  color: #666;
+  line-height: 1.6;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .section-header.mobile-only {
+    display: block;
+    position: relative;
+    left: 0;
+    top: 0;
+    transform: none;
+    transform-origin: center;
+    margin-bottom: 2rem;
+    padding: 1rem 0;
+    text-align: center;
+  }
+
+  .section-header.desktop-only {
+    display: none;
+  }
+
+  .products-section {
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-y;
+    scroll-behavior: smooth;
+    padding-top: 100px;
+  }
+
+  .products-container {
+    padding-top: 0;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .section-header h2 {
+    font-size: 2rem;
+  }
+
+  .products-grid {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1.2rem;
+    padding-left: 0;
+    margin-top: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .section-header.mobile-only {
+    top: 0;
+    margin-bottom: 1.5rem;
+  }
+
+  .products-section {
+    padding-top: 80px;
+  }
+
+  .section-header h2 {
+    font-size: 1.8rem;
+  }
+
+  .products-grid {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 1rem;
+    padding-left: 0;
+    margin-top: 0;
+  }
+}
+
+.scroll-button {
+  margin-top: 3rem;
+  padding: 1rem 2.5rem;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.2rem;
+  color: #1a1a1a;
+  background: transparent;
+  border: 2px solid #1a1a1a;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  letter-spacing: 1px;
+}
+
+.scroll-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background-color: #1a1a1a;
+  transition: width 0.3s ease;
+  z-index: -1;
+}
+
+.scroll-button:hover {
+  color: #faf9f6;
+}
+
+.scroll-button:hover::before {
+  width: 100%;
+} 

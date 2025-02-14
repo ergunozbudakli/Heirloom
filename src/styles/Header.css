@@ -1,0 +1,309 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 3rem;
+  background-color: #faf9f6;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  border-bottom: 1px solid #eee;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.menu-button {
+  background: none;
+  border: none;
+  font-size: 1.3rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  color: #1a1a1a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu-button:hover {
+  color: #000;
+}
+
+.header-logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  background: transparent;
+}
+
+.header-logo:hover {
+  transform: scale(1.05);
+  background: transparent;
+}
+
+.header-logo-image {
+  height: 100px;
+  width: auto;
+  background: transparent;
+  mix-blend-mode: multiply;
+  transition: transform 0.3s ease;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.header-logo-text {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.8rem;
+  font-weight: 600;
+  letter-spacing: 3px;
+  margin: 0;
+  color: #1a1a1a;
+  line-height: 1;
+}
+
+.header-logo-subtext {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 0.9rem;
+  font-style: italic;
+  color: #333;
+  margin: 0;
+  letter-spacing: 1.5px;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+}
+
+.header-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  color: #1a1a1a;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  transition: all 0.2s ease;
+}
+
+.button-icon {
+  font-size: 1.1rem;
+  color: #1a1a1a;
+}
+
+.button-text {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-family: "Cormorant Garamond", serif;
+  font-weight: 700;
+}
+
+.header-button:hover {
+  color: #000;
+  transform: translateY(-1px);
+}
+
+.header-button:hover .button-icon {
+  color: #000;
+}
+
+.header-button.cart-button {
+  position: relative;
+}
+
+.cart-button .button-icon {
+  position: relative;
+}
+
+.cart-button .button-text {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.account-menu-container {
+  position: relative;
+}
+
+.chevron-icon {
+  margin-left: 5px;
+  font-size: 0.8rem;
+  transition: transform 0.3s ease;
+}
+
+.account-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  min-width: 200px;
+  z-index: 1000;
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  animation: fadeIn 0.2s ease;
+}
+
+.account-dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  color: #1a1a1a;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  border-radius: 6px;
+  font-weight: 600;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.1rem;
+}
+
+.account-dropdown-item span {
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.account-dropdown-item:hover {
+  background-color: #f5f5f5;
+  transform: translateX(5px);
+}
+
+.dropdown-icon {
+  font-size: 1rem;
+  width: 20px;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Mobil Uyumluluk */
+@media (max-width: 768px) {
+  .header {
+    padding: 1rem;
+  }
+
+  .header-logo-text {
+    font-size: 1.4rem;
+  }
+
+  .header-logo-subtext {
+    font-size: 0.8rem;
+  }
+
+  .header-right {
+    gap: 1rem;
+  }
+
+  .button-text {
+    display: none !important;
+  }
+
+  .header-button {
+    padding: 0.3rem;
+  }
+
+  .button-icon {
+    font-size: 1.3rem;
+  }
+
+  .cart-button[data-count]:not([data-count="0"])::after {
+    content: attr(data-count);
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: #1a1a1a;
+    color: white;
+    font-size: 0.7rem;
+    min-width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+  }
+
+  .header-logo-image {
+    height: 75px;
+  }
+
+  .account-dropdown {
+    position: fixed;
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    border-radius: 15px 15px 0 0;
+    margin-top: 0;
+    padding: 1rem;
+    animation: slideUp 0.3s ease;
+  }
+
+  .account-dropdown-item {
+    padding: 15px;
+    font-size: 1.1rem;
+  }
+
+  @keyframes slideUp {
+    from {
+      transform: translateY(100%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+}
+
+/* Daha küçük ekranlar için */
+@media (max-width: 480px) {
+  .header {
+    padding: 0.8rem;
+  }
+
+  .header-left {
+    gap: 1rem;
+  }
+
+  .header-logo-text {
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+  }
+
+  .header-logo-subtext {
+    font-size: 0.7rem;
+    letter-spacing: 1px;
+  }
+
+  .header-right {
+    gap: 0.8rem;
+  }
+
+  .button-icon {
+    font-size: 1.2rem;
+  }
+
+  .header-logo-image {
+    height: 55px;
+  }
+} 

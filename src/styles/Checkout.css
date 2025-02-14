@@ -1,0 +1,876 @@
+.checkout-container {
+  padding: 120px 20px 40px;
+  min-height: 100vh;
+  background-color: #faf9f6;
+}
+
+.checkout-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+}
+
+.checkout-steps {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+  gap: 2rem;
+}
+
+.step {
+  padding: 1.2rem 2.5rem;
+  background: #f5f5f5;
+  border-radius: 30px;
+  color: #666;
+  font-weight: 500;
+  position: relative;
+  transition: all 0.3s ease;
+  font-size: 0.95rem;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.step-number {
+  width: 32px;
+  height: 32px;
+  background: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  color: #1a1a1a;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.step-text {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+}
+
+.step.active {
+  background: #1a1a1a;
+  color: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.step.active .step-number {
+  background: white;
+  color: #1a1a1a;
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.step:hover {
+  transform: translateY(-2px);
+}
+
+.checkout-form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.form-section {
+  padding: 3rem;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+  position: relative;
+  overflow: hidden;
+}
+
+.form-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, #1a1a1a, #666);
+}
+
+.form-section h2 {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 2.2rem;
+  margin-bottom: 3rem;
+  color: #1a1a1a;
+  position: relative;
+  padding-bottom: 1rem;
+  text-align: center;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.form-section h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(90deg, #1a1a1a, #666);
+  border-radius: 2px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.form-group {
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 1rem;
+  color: #666;
+  font-weight: 500;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  position: relative;
+  padding-left: 0;
+  opacity: 0.8;
+}
+
+.form-group label::before {
+  display: none;
+}
+
+.form-group:focus-within label {
+  color: #1a1a1a;
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 1.2rem;
+  border: 2px solid #eee;
+  border-radius: 12px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background-color: #f8f8f8;
+  color: #333;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+
+.form-group input:hover,
+.form-group textarea:hover {
+  background-color: #f5f5f5;
+  border-color: #e0e0e0;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: #1a1a1a;
+  background-color: #fff;
+  outline: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transform: translateY(-2px);
+}
+
+.form-group textarea {
+  min-height: 120px;
+  resize: vertical;
+  line-height: 1.6;
+}
+
+.card-input,
+.cvv-input {
+  position: relative;
+}
+
+.card-icon,
+.cvv-icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #666;
+}
+
+.card-icon {
+  left: 1rem;
+}
+
+.cvv-icon {
+  right: 1rem;
+}
+
+.card-input input {
+  padding-left: 3rem;
+}
+
+.cvv-input input {
+  padding-right: 2.5rem;
+}
+
+.order-summary {
+  padding: 2rem;
+  background: #f9f9f9;
+  border-radius: 8px;
+  margin-top: 2rem;
+}
+
+.order-summary h3 {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.8rem;
+  margin-bottom: 2rem;
+  color: #1a1a1a;
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+.order-summary h3::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 50px;
+  height: 2px;
+  background: linear-gradient(90deg, #1a1a1a, #666);
+  border-radius: 2px;
+}
+
+.order-items {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.order-item {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  background: white;
+  border-radius: 4px;
+}
+
+.order-item img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.item-details {
+  flex: 1;
+}
+
+.item-details h4 {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.2rem;
+  margin: 0 0 0.8rem;
+  color: #1a1a1a;
+  font-weight: 600;
+}
+
+.item-price {
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.order-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 2px solid #eee;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  letter-spacing: 0.5px;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+.back-button,
+.submit-button,
+.view-cart-button {
+  padding: 1.2rem 2.5rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.back-button {
+  background: #f5f5f5;
+  color: #1a1a1a;
+}
+
+.back-button:hover {
+  background: #e0e0e0;
+  transform: translateY(-1px);
+}
+
+.view-cart-button {
+  background: #666;
+  color: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.view-cart-button:hover {
+  background: #555;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.submit-button {
+  background: #1a1a1a;
+  color: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.submit-button:hover {
+  background: #000;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+@media (max-width: 768px) {
+  .checkout-content {
+    padding: 1rem;
+  }
+
+  .form-section {
+    padding: 1.5rem;
+  }
+
+  .form-section h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .form-group {
+    margin-bottom: 1rem;
+  }
+
+  .form-group label {
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .form-group input,
+  .form-group textarea {
+    padding: 0.8rem;
+    font-size: 0.9rem;
+  }
+
+  .card-input input {
+    padding-left: 2.5rem;
+  }
+
+  .cvv-input input {
+    padding-right: 2rem;
+  }
+
+  .card-icon {
+    left: 0.8rem;
+    font-size: 0.9rem;
+  }
+
+  .cvv-icon {
+    right: 0.8rem;
+    font-size: 0.9rem;
+  }
+
+  .checkout-steps {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .step {
+    width: 100%;
+    text-align: center;
+  }
+
+  .form-actions {
+    flex-direction: column;
+  }
+
+  .action-buttons {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .back-button,
+  .submit-button,
+  .view-cart-button {
+    width: 100%;
+  }
+
+  .card-number {
+    font-size: 1.2rem;
+    margin-top: 25px;
+  }
+
+  .card-holder,
+  .card-expires {
+    font-size: 0.8rem;
+  }
+
+  .credit-card[data-bank] .card-front {
+    background-size: 70px 45px !important;
+    background-position: 20px 20px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .checkout-container {
+    padding: 80px 10px 20px;
+  }
+
+  .form-section {
+    padding: 1rem;
+    border-radius: 12px;
+  }
+
+  .form-section h2 {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.8rem;
+  }
+
+  .form-section h2::after {
+    width: 60px;
+    height: 2px;
+  }
+
+  .form-row {
+    gap: 0.8rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .form-group {
+    margin-bottom: 0.8rem;
+  }
+
+  .form-group label {
+    font-size: 0.8rem;
+    margin-bottom: 0.4rem;
+    letter-spacing: 0.5px;
+  }
+
+  .form-group input,
+  .form-group textarea {
+    padding: 0.7rem;
+    font-size: 0.85rem;
+    border-radius: 8px;
+  }
+
+  .card-input input {
+    padding-left: 2.2rem;
+  }
+
+  .cvv-input input {
+    padding-right: 1.8rem;
+  }
+
+  .card-icon,
+  .cvv-icon {
+    font-size: 0.85rem;
+  }
+
+  .card-icon {
+    left: 0.7rem;
+  }
+
+  .cvv-icon {
+    right: 0.7rem;
+  }
+
+  .order-summary {
+    padding: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  .order-summary h3 {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+  }
+
+  .order-item {
+    padding: 0.8rem;
+  }
+
+  .item-details h4 {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .order-total {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    font-size: 1.1rem;
+  }
+
+  .card-number {
+    font-size: 0.8rem !important;
+    margin-top: 25px !important;
+    letter-spacing: 1.5px !important;
+  }
+
+  .credit-card-container {
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto 1.5rem;
+    padding: 0;
+    transform: scale(0.95);
+    transform-origin: top center;
+  }
+
+  .credit-card {
+    width: 100%;
+    max-width: 320px;
+    height: 150px !important;
+    margin: 0 auto;
+  }
+
+  .card-front,
+  .card-back {
+    width: 100%;
+    height: 150px !important;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .card-content {
+    padding: 15px;
+  }
+
+  .card-holder,
+  .card-expires {
+    font-size: 0.7rem !important;
+    letter-spacing: 1px !important;
+  }
+
+  .credit-card .card-front[data-type]::after {
+    width: 45px;
+    height: 28px;
+    top: 10px;
+    right: 10px;
+    padding: 2px;
+  }
+
+  .credit-card[data-bank] .card-front {
+    background-size: 50px 32px !important;
+    background-position: 12px 12px !important;
+  }
+}
+
+.credit-card-container {
+  perspective: 1000px;
+  width: 100%;
+  max-width: 400px;
+  margin: 20px auto;
+  position: relative;
+  z-index: 10;
+}
+
+.credit-card {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  height: 250px;
+  transform-style: preserve-3d;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  margin: 0 auto;
+}
+
+.credit-card.flipped {
+  transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 15px;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.card-front {
+  transform: rotateY(0);
+  background: linear-gradient(45deg, #404040, #505050);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card-back {
+  transform: rotateY(180deg);
+  background: #eee;
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.credit-card[data-bank] .card-front {
+  background-image: var(--bank-bg);
+  background-size: 90px 60px !important;
+  background-position: 25px 25px !important;
+  background-repeat: no-repeat !important;
+  position: relative;
+  background-color: #404040 !important;
+}
+
+.credit-card[data-bank="Garanti BBVA"] .card-front { --bank-bg: url('../assets/images/cards/garanti.png'); }
+.credit-card[data-bank="İş Bankası"] .card-front { --bank-bg: url('../assets/images/cards/isbank.png'); }
+.credit-card[data-bank="Yapı Kredi"] .card-front { --bank-bg: url('../assets/images/cards/yapikredi.png'); }
+.credit-card[data-bank="Akbank"] .card-front { --bank-bg: url('../assets/images/cards/akbank.png'); }
+.credit-card[data-bank="Ziraat Bankası"] .card-front { --bank-bg: url('../assets/images/cards/ziraat.png'); }
+.credit-card[data-bank="Vakıfbank"] .card-front { --bank-bg: url('../assets/images/cards/vakifbank.png'); }
+.credit-card[data-bank="QNB Finansbank"] .card-front { --bank-bg: url('../assets/images/cards/qnb.png'); }
+.credit-card[data-bank="Enpara"] .card-front { --bank-bg: url('../assets/images/cards/qnb.png'); }
+.credit-card[data-bank="Denizbank"] .card-front { --bank-bg: url('../assets/images/cards/denizbank.png'); }
+
+.card-stripe {
+  background: #333;
+  height: 50px;
+  margin-top: 30px;
+}
+
+.card-back .card-cvv {
+  background: white;
+  width: 60px;
+  height: 30px;
+  margin: 20px 40px 0 auto;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: monospace;
+  position: relative;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.card-back .card-cvv::before {
+  content: 'CVV';
+  position: absolute;
+  left: -35px;
+  font-size: 12px;
+  color: #666;
+}
+
+.card-front::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.1));
+  z-index: 1;
+}
+
+.card-content {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: white;
+  padding: 20px;
+}
+
+.card-number {
+  font-size: 1.4rem;
+  letter-spacing: 2px;
+  margin-top: 60px;
+  font-family: monospace;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+  font-weight: 600;
+  line-height: 1;
+}
+
+.card-info {
+  display: flex;
+  justify-content: space-between;
+  margin-top: auto;
+}
+
+.card-holder,
+.card-expires {
+  text-transform: uppercase;
+  font-size: 1.1rem;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+  font-weight: 500;
+}
+
+.credit-card .card-front[data-type]::after {
+  content: '';
+  position: absolute;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  z-index: 2;
+  background-color: rgba(255, 255, 255, 0.95);
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.credit-card .card-front[data-type="visa"]::after {
+  background-image: url('../assets/images/cards/visa.png');
+}
+
+.credit-card .card-front[data-type="mastercard"]::after {
+  background-image: url('../assets/images/cards/mastercard.png');
+}
+
+.credit-card .card-front[data-type="amex"]::after {
+  background-image: url('../assets/images/cards/amex.png');
+}
+
+.credit-card .card-front[data-type="troy"]::after {
+  background-image: url('../assets/images/cards/troy.png');
+}
+
+.credit-card .card-front[data-type="discover"]::after {
+  background-image: url('../assets/images/cards/discover.png');
+}
+
+.credit-card .card-front[data-type="diners"]::after {
+  background-image: url('../assets/images/cards/diners.png');
+}
+
+.credit-card .card-front[data-type="jcb"]::after {
+  background-image: url('../assets/images/cards/jcb.png');
+}
+
+.credit-card .card-front[data-type="unionpay"]::after {
+  background-image: url('../assets/images/cards/unionpay.png');
+}
+
+@media (min-width: 1024px) {
+  .credit-card .card-front[data-type]::after {
+    width: 70px;
+    height: 45px;
+    top: 20px;
+    right: 20px;
+    padding: 6px;
+  }
+
+  .credit-card[data-bank] .card-front {
+    background-size: 90px 60px !important;
+    background-position: 25px 25px !important;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1023px) {
+  .credit-card .card-front[data-type]::after {
+    width: 60px;
+    height: 40px;
+    top: 15px;
+    right: 15px;
+    padding: 4px;
+  }
+
+  .credit-card[data-bank] .card-front {
+    background-size: 80px 50px !important;
+    background-position: 20px 20px !important;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  .credit-card .card-front[data-type]::after {
+    width: 50px;
+    height: 35px;
+    top: 12px;
+    right: 12px;
+    padding: 3px;
+  }
+
+  .credit-card[data-bank] .card-front {
+    background-size: 70px 45px !important;
+    background-position: 20px 20px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .credit-card .card-front[data-type]::after {
+    width: 35px;
+    height: 20px;
+    top: 8px;
+    right: 8px;
+    padding: 1px;
+  }
+
+  .credit-card[data-bank] .card-front {
+    background-size: 40px 25px !important;
+    background-position: 10px 10px !important;
+  }
+
+  .card-content {
+    justify-content: flex-start;
+    gap: 25px;
+  }
+
+  .card-number {
+    margin-top: 35px;
+  }
+
+  .card-info {
+    margin-top: 0;
+  }
+}
+
+.credit-card:not([data-bank]) {
+  background: linear-gradient(45deg, #404040, #505050);
+}
+
+.credit-card.amex { background-image: url('../assets/images/cards/amex.png'); }
+.credit-card.troy { background-image: url('../assets/images/cards/troy.png'); }
+.credit-card.discover { background-image: url('../assets/images/cards/discover.png'); }
+.credit-card.diners { background-image: url('../assets/images/cards/diners.png'); }
+.credit-card.jcb { background-image: url('../assets/images/cards/jcb.png'); } 
