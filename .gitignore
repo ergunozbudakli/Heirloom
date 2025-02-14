@@ -39,6 +39,10 @@ dist-ssr
 .cursor
 *.cursor
 .cursor/*
+.cursor/rules/
+.cursor/rules/*
+**/cursor/rules/**
+**/customrules.mdc
 
 # misc
 .env.local
