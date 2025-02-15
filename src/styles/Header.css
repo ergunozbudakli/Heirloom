@@ -195,6 +195,58 @@
   }
 }
 
+.account-info {
+  padding: 1rem;
+  border-bottom: 1px solid #eee;
+  text-align: left;
+}
+
+.user-name {
+  display: block;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 0.3rem;
+}
+
+.user-email {
+  display: block;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.logout-button {
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 12px 16px;
+  color: #ff4444;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.1rem;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-top: 1px solid #eee;
+  margin-top: 0.5rem;
+}
+
+.logout-button:hover {
+  background-color: #fff5f5;
+  color: #ff0000;
+}
+
+.logout-button .dropdown-icon {
+  color: #ff4444;
+}
+
+.logout-button:hover .dropdown-icon {
+  color: #ff0000;
+}
+
 /* Mobil Uyumluluk */
 @media (max-width: 768px) {
   .header {
@@ -248,30 +300,26 @@
   }
 
   .account-dropdown {
-    position: fixed;
-    top: auto;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    width: 100%;
-    border-radius: 15px 15px 0 0;
-    margin-top: 0;
-    padding: 1rem;
-    animation: slideUp 0.3s ease;
+    width: 100vw;
+    max-height: 90vh;
+    overflow-y: auto;
   }
 
-  .account-dropdown-item {
+  .account-info {
+    padding: 1.5rem;
+  }
+
+  .user-name {
+    font-size: 1.3rem;
+  }
+
+  .user-email {
+    font-size: 1rem;
+  }
+
+  .logout-button {
     padding: 15px;
-    font-size: 1.1rem;
-  }
-
-  @keyframes slideUp {
-    from {
-      transform: translateY(100%);
-    }
-    to {
-      transform: translateY(0);
-    }
+    font-size: 1.2rem;
   }
 }
 

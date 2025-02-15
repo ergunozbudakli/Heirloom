@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
   faBars, 
@@ -9,18 +9,24 @@ import {
   faUser,
   faSignInAlt,
   faUserPlus,
-  faChevronDown 
+  faChevronDown,
+  faSignOutAlt,
+  faCog,
+  faClipboardList
 } from '@fortawesome/free-solid-svg-icons';
 import { useCart } from '../context/CartContext';
+import { useAuth } from '../context/AuthContext';
 import '../styles/Header.css';
 import SideMenu from './SideMenu';
 import CartPreview from './CartPreview';
 import heirloomLogo from '../assets/images/heirloomlogo.png';
 
 const Header = () => {
+  const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isAccountMenuOpen, setIsAccountMenuOpen] = useState(false);
   const { getCartCount, isCartOpen, setIsCartOpen, toggleCart } = useCart();
+  const { user, logout } = useAuth();
   const accountMenuRef = useRef(null);
 
   const toggleMenu = () => {
@@ -30,6 +36,12 @@ const Header = () => {
 
   const toggleAccountMenu = () => {
     setIsAccountMenuOpen(!isAccountMenuOpen);
+  };
+
+  const handleLogout = () => {
+    logout();
+    setIsAccountMenuOpen(false);
+    navigate('/');
   };
 
   useEffect(() => {
@@ -71,19 +83,48 @@ const Header = () => {
           <div className="account-menu-container" ref={accountMenuRef}>
             <button className="header-button" onClick={toggleAccountMenu}>
               <FontAwesomeIcon icon={faUser} className="button-icon" />
-              <span className="button-text">HESABIM</span>
+              <span className="button-text">
+                {user ? `${user.firstName} ${user.lastName}` : 'HESABIM'}
+              </span>
               <FontAwesomeIcon icon={faChevronDown} className="chevron-icon" />
             </button>
             {isAccountMenuOpen && (
               <div className="account-dropdown">
-                <Link to="/login" className="account-dropdown-item">
-                  <FontAwesomeIcon icon={faSignInAlt} className="dropdown-icon" />
-                  <span>Üye Girişi</span>
-                </Link>
-                <Link to="/register" className="account-dropdown-item">
-                  <FontAwesomeIcon icon={faUserPlus} className="dropdown-icon" />
-                  <span>Üye Ol</span>
-                </Link>
+                {user ? (
+                  <>
+                    <div className="account-info">
+                      <span className="user-name">{user.firstName} {user.lastName}</span>
+                      <span className="user-email">{user.email}</span>
+                    </div>
+                    <Link to="/profile" className="account-dropdown-item">
+                      <FontAwesomeIcon icon={faUser} className="dropdown-icon" />
+                      <span>Bilgilerim</span>
+                    </Link>
+                    <Link to="/orders" className="account-dropdown-item">
+                      <FontAwesomeIcon icon={faClipboardList} className="dropdown-icon" />
+                      <span>Siparişlerim</span>
+                    </Link>
+                    <Link to="/settings" className="account-dropdown-item">
+                      <FontAwesomeIcon icon={faCog} className="dropdown-icon" />
+                      <span>Ayarlar</span>
+                    </Link>
+                    <button onClick={handleLogout} className="account-dropdown-item logout-button">
+                      <FontAwesomeIcon icon={faSignOutAlt} className="dropdown-icon" />
+                      <span>Çıkış Yap</span>
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <Link to="/login" className="account-dropdown-item">
+                      <FontAwesomeIcon icon={faSignInAlt} className="dropdown-icon" />
+                      <span>Üye Girişi</span>
+                    </Link>
+                    <Link to="/register" className="account-dropdown-item">
+                      <FontAwesomeIcon icon={faUserPlus} className="dropdown-icon" />
+                      <span>Üye Ol</span>
+                    </Link>
+                  </>
+                )}
               </div>
             )}
           </div>
