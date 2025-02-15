@@ -139,6 +139,6 @@ Bu proje MIT lisansı altında lisanslanmıştır. Detaylar için [LICENSE](LICE
 
 ## 📧 İletişim
 
-Proje Sahibi - [@your-twitter](https://twitter.com/your-twitter)
+Proje Sahibi - [Ergün Özbudaklı](https://www.linkedin.com/in/ergün-özbudaklı-339b57136/)
 
-Proje Linki: [https://github.com/your-username/heirloom](https://github.com/your-username/heirloom)
+Proje Linki: [https://github.com/ergunozbudakli/Heirloom](https://github.com/ergunozbudakli/Heirloom)
