@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
+import { useAuth } from '../context/AuthContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCreditCard, faLock } from '@fortawesome/free-solid-svg-icons';
+import { faCreditCard, faLock, faMapMarkerAlt, faPlus } from '@fortawesome/free-solid-svg-icons';
 import '../styles/Checkout.css';
+import AddressForm from './AddressForm';
 
 const CARD_TYPES = {
   visa: {
@@ -104,6 +106,9 @@ const CARD_TYPES = {
 const Checkout = () => {
   const navigate = useNavigate();
   const { cart, getCartTotal, setIsCartOpen } = useCart();
+  const { user } = useAuth();
+  const [addresses, setAddresses] = useState([]);
+  const [selectedAddress, setSelectedAddress] = useState(null);
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -122,6 +127,42 @@ const Checkout = () => {
   const [cardType, setCardType] = useState('');
   const [bankName, setBankName] = useState('');
   const [isCardFlipped, setIsCardFlipped] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [showAddressForm, setShowAddressForm] = useState(false);
+
+  useEffect(() => {
+    const fetchAddresses = async () => {
+      try {
+        const response = await fetch(`http://192.168.50.33:5000/api/addresses`, {
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+          }
+        });
+        const data = await response.json();
+        
+        if (response.ok && data.success) {
+          setAddresses(data.data || []); // data.data'yı kullan veya boş dizi döndür
+          // Varsayılan adresi seç
+          const defaultAddress = data.data?.find(addr => addr.isDefault);
+          if (defaultAddress) {
+            setSelectedAddress(defaultAddress);
+          }
+        } else {
+          console.error('Adresler yüklenirken hata:', data.message);
+          setAddresses([]); // Hata durumunda boş dizi
+        }
+      } catch (error) {
+        console.error('Adresler yüklenirken hata:', error);
+        setAddresses([]); // Hata durumunda boş dizi
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (user) {
+      fetchAddresses();
+    }
+  }, [user]);
 
   const detectCardTypeAndBank = (number) => {
     // Boşlukları kaldır
@@ -238,6 +279,10 @@ const Checkout = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (step === 1) {
+      if (!selectedAddress) {
+        alert('Lütfen bir teslimat adresi seçin');
+        return;
+      }
       setStep(2);
     } else {
       // Burada ödeme işlemi gerçekleştirilecek
@@ -266,6 +311,31 @@ const Checkout = () => {
     setIsCartOpen(true);
   };
 
+  // Adres ekleme formunu kapatma ve adresleri yenileme
+  const handleAddressFormClose = async () => {
+    setShowAddressForm(false);
+    // Adresleri yeniden yükle
+    try {
+      const response = await fetch(`http://192.168.50.33:5000/api/addresses`, {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+      });
+      const data = await response.json();
+      
+      if (response.ok && data.success) {
+        setAddresses(data.data || []);
+        // En son eklenen adresi seç
+        const defaultAddress = data.data?.find(addr => addr.isDefault);
+        if (defaultAddress) {
+          setSelectedAddress(defaultAddress);
+        }
+      }
+    } catch (error) {
+      console.error('Adresler yüklenirken hata:', error);
+    }
+  };
+
   return (
     <div className="checkout-container">
       <div className="checkout-content">
@@ -285,91 +355,59 @@ const Checkout = () => {
             <div className="form-section">
               <h2>Teslimat Bilgileri</h2>
               
-              <div className="form-row">
-                <div className="form-group">
-                  <label htmlFor="firstName">Ad</label>
-                  <input
-                    type="text"
-                    id="firstName"
-                    name="firstName"
-                    value={formData.firstName}
-                    onChange={handleInputChange}
-                    required
-                  />
+              {loading ? (
+                <div className="loading">Adresler yükleniyor...</div>
+              ) : addresses.length === 0 ? (
+                <div className="no-address">
+                  <FontAwesomeIcon icon={faMapMarkerAlt} />
+                  <p>Kayıtlı adresiniz bulunmamaktadır.</p>
+                  <button
+                    type="button"
+                    className="add-address-button"
+                    onClick={() => setShowAddressForm(true)}
+                  >
+                    Yeni Adres Ekle
+                  </button>
                 </div>
-                <div className="form-group">
-                  <label htmlFor="lastName">Soyad</label>
-                  <input
-                    type="text"
-                    id="lastName"
-                    name="lastName"
-                    value={formData.lastName}
-                    onChange={handleInputChange}
-                    required
-                  />
+              ) : (
+                <div className="address-selection">
+                  <div className="address-list">
+                    {addresses.map(address => (
+                      <div
+                        key={address.id}
+                        className={`address-card ${selectedAddress?.id === address.id ? 'selected' : ''}`}
+                        onClick={() => setSelectedAddress(address)}
+                      >
+                        <div className="address-card-header">
+                          <h3>
+                            {address.title}
+                            {address.isDefault && (
+                              <span className="default-badge">Varsayılan</span>
+                            )}
+                          </h3>
+                        </div>
+                        <div className="address-card-content">
+                          <p className="name">{address.firstName} {address.lastName}</p>
+                          <p className="phone">{address.phone}</p>
+                          <p className="address">
+                            {address.addressText}<br />
+                            {address.neighborhood} Mah. {address.district}/{address.city}<br />
+                            {address.postalCode}
+                          </p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                  <button
+                    type="button"
+                    className="add-address-button"
+                    onClick={() => setShowAddressForm(true)}
+                  >
+                    <FontAwesomeIcon icon={faPlus} />
+                    Yeni Adres Ekle
+                  </button>
                 </div>
-              </div>
-
-              <div className="form-row">
-                <div className="form-group">
-                  <label htmlFor="email">E-posta</label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    required
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="phone">Telefon</label>
-                  <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleInputChange}
-                    required
-                  />
-                </div>
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="address">Adres</label>
-                <textarea
-                  id="address"
-                  name="address"
-                  value={formData.address}
-                  onChange={handleInputChange}
-                  required
-                />
-              </div>
-
-              <div className="form-row">
-                <div className="form-group">
-                  <label htmlFor="city">Şehir</label>
-                  <input
-                    type="text"
-                    id="city"
-                    name="city"
-                    value={formData.city}
-                    onChange={handleInputChange}
-                    required
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="zipCode">Posta Kodu</label>
-                  <input
-                    type="text"
-                    id="zipCode"
-                    name="zipCode"
-                    value={formData.zipCode}
-                    onChange={handleInputChange}
-                    required
-                  />
-                </div>
-              </div>
+              )}
             </div>
           ) : (
             <div className="form-section">
@@ -514,6 +552,18 @@ const Checkout = () => {
           </div>
         </form>
       </div>
+
+      {/* Adres Ekleme Modal */}
+      {showAddressForm && (
+        <div className="modal-overlay" onClick={() => setShowAddressForm(false)}>
+          <div className="modal-content" onClick={e => e.stopPropagation()}>
+            <AddressForm 
+              onClose={handleAddressFormClose}
+              editingAddress={null}
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 };

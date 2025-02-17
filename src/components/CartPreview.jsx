@@ -23,6 +23,7 @@ const CartPreview = ({ isOpen, onClose }) => {
 
   const handleCheckout = () => {
     onClose();
+    setIsModalOpen(false);
     navigate('/checkout');
   };
 

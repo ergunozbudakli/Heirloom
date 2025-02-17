@@ -8,6 +8,9 @@ import Login from './components/Login';
 import { CartProvider } from './context/CartContext';
 import { AuthProvider } from './context/AuthContext';
 import './App.css';
+import ProfileEdit from './components/ProfileEdit';
+import AddressList from './components/AddressList';
+import PrivateRoute from './components/PrivateRoute';
 
 function App() {
   return (
@@ -20,6 +23,8 @@ function App() {
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/profile/edit" element={<PrivateRoute><ProfileEdit /></PrivateRoute>} />
+            <Route path="/addresses" element={<PrivateRoute><AddressList /></PrivateRoute>} />
           </Routes>
         </div>
       </CartProvider>

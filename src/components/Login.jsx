@@ -14,6 +14,7 @@ const Login = () => {
   });
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -26,8 +27,11 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
+    setError('');
+
     try {
-      const response = await fetch('http://localhost:5000/api/auth/login', {
+      const response = await fetch('http://192.168.50.33:5000/api/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -38,17 +42,28 @@ const Login = () => {
       const data = await response.json();
 
       if (response.ok) {
+        // Kullanıcı bilgilerini düzenle
+        const userData = {
+          ...data.user,
+          name: data.user.name || `${data.user.firstName} ${data.user.lastName}`,
+        };
+
         // Token'ı localStorage'a kaydet
         localStorage.setItem('token', data.token);
+        
         // AuthContext'e kullanıcı bilgilerini kaydet
-        login(data.user);
+        login(userData);
+        
         // Ana sayfaya yönlendir
         navigate('/');
       } else {
         setError(data.message || 'Giriş yapılırken bir hata oluştu');
       }
     } catch (error) {
+      console.error('Login error:', error);
       setError('Sunucu ile bağlantı kurulamadı');
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -105,7 +120,7 @@ const Login = () => {
             </div>
           </div>
 
-          <button type="submit" className="login-button">
+          <button type="submit" className="login-button" disabled={isLoading}>
             Giriş Yap
           </button>
 

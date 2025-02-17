@@ -80,65 +80,6 @@ npm run dev
 
 ### Frontend (.env)
 ```env
-REACT_APP_API_URL=http://localhost:5000
+REACT_APP_API_URL=http://192.168.50.33:5000
 PORT=3001
 ```
-
-### Backend (.env)
-```env
-PORT=5000
-DB_SERVER=localhost\SQLEXPRESS
-DB_USER=your_username
-DB_PASSWORD=your_password
-DB_DATABASE=HeirloomDB
-JWT_SECRET=your-secret-key
-JWT_EXPIRES_IN=24h
-```
-
-## 📁 Proje Yapısı
-
-```
-heirloom/
-├── frontend/
-│   ├── public/
-│   ├── src/
-│   │   ├── components/
-│   │   ├── context/
-│   │   ├── styles/
-│   │   ├── assets/
-│   │   └── data/
-│   └── package.json
-│
-└── backend/
-    ├── config/
-    ├── controllers/
-    ├── middleware/
-    ├── models/
-    ├── routes/
-    └── package.json
-```
-
-## 🔒 Güvenlik
-
-- JWT tabanlı kimlik doğrulama
-- Şifreleme için bcrypt
-- SQL injection koruması
-- CORS yapılandırması
-
-## 🤝 Katkıda Bulunma
-
-1. Fork edin
-2. Feature branch oluşturun (`git checkout -b feature/amazing-feature`)
-3. Değişikliklerinizi commit edin (`git commit -m 'feat: Amazing feature added'`)
-4. Branch'inizi push edin (`git push origin feature/amazing-feature`)
-5. Pull Request oluşturun
-
-## 📝 Lisans
-
-Bu proje MIT lisansı altında lisanslanmıştır. Detaylar için [LICENSE](LICENSE) dosyasına bakın.
-
-## 📧 İletişim
-
-Proje Sahibi - [Ergün Özbudaklı](https://www.linkedin.com/in/ergün-özbudaklı-339b57136/)
-
-Proje Linki: [https://github.com/ergunozbudakli/Heirloom](https://github.com/ergunozbudakli/Heirloom)

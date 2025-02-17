@@ -3,14 +3,11 @@ import React, { createContext, useState, useContext, useEffect } from 'react';
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
-
-  useEffect(() => {
+  const [user, setUser] = useState(() => {
+    // Başlangıçta localStorage'dan kullanıcı bilgilerini al
     const userStr = localStorage.getItem('user');
-    if (userStr) {
-      setUser(JSON.parse(userStr));
-    }
-  }, []);
+    return userStr ? JSON.parse(userStr) : null;
+  });
 
   const login = (userData) => {
     setUser(userData);
@@ -23,8 +20,21 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem('token');
   };
 
+  const updateUser = (userData) => {
+    setUser(userData);
+    localStorage.setItem('user', JSON.stringify(userData));
+  };
+
+  // Kullanıcı bilgilerini localStorage'dan senkronize et
+  useEffect(() => {
+    const userStr = localStorage.getItem('user');
+    if (userStr && !user) {
+      setUser(JSON.parse(userStr));
+    }
+  }, [user]);
+
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider value={{ user, login, logout, updateUser }}>
       {children}
     </AuthContext.Provider>
   );

@@ -50,3 +50,20 @@ dist-ssr
 .env.test.local
 .env.production.local
 .env
+
+# IDE
+.idea/
+.vscode/
+
+# Database
+*.sql
+/backend/config/createTables.sql
+/backend/config/createLocationTables.sql
+
+# Sensitive information
+/backend/config/dbConfig.js
+
+# Scripts
+*.bat
+*.sh
+*.ps1

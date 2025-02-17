@@ -4,6 +4,9 @@ require('dotenv').config();
 const { database } = require('./config/db');
 const authRoutes = require('./routes/authRoutes');
 const cartRoutes = require('./routes/cartRoutes');
+const userRoutes = require('./routes/users');
+const locationRoutes = require('./routes/locationRoutes');
+const addressRoutes = require('./routes/addressRoutes');
 
 const app = express();
 
@@ -36,14 +39,19 @@ process.on('SIGINT', async () => {
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/cart', cartRoutes);
+app.use('/api/users', userRoutes);
+app.use('/api/locations', locationRoutes);
+app.use('/api/addresses', addressRoutes);
 
 // Ana route
 app.get('/', (req, res) => {
   res.json({ message: 'Heirloom API çalışıyor' });
 });
 
-// Port dinleme
+// Port ayarı
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`Server ${PORT} portunda çalışıyor`);
+
+// Sunucuyu başlat
+app.listen(PORT, '192.168.50.33', () => {
+  console.log(`Server ${PORT} portunda çalışıyor (http://192.168.50.33:${PORT})`);
 }); 

@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
   faBars, 
@@ -12,7 +12,8 @@ import {
   faChevronDown,
   faSignOutAlt,
   faCog,
-  faClipboardList
+  faClipboardList,
+  faMapMarkerAlt
 } from '@fortawesome/free-solid-svg-icons';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
@@ -23,10 +24,11 @@ import heirloomLogo from '../assets/images/heirloomlogo.png';
 
 const Header = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isAccountMenuOpen, setIsAccountMenuOpen] = useState(false);
   const { getCartCount, isCartOpen, setIsCartOpen, toggleCart } = useCart();
-  const { user, logout } = useAuth();
+  const { user, logout, updateUser } = useAuth();
   const accountMenuRef = useRef(null);
 
   const toggleMenu = () => {
@@ -57,6 +59,22 @@ const Header = () => {
     };
   }, []);
 
+  useEffect(() => {
+    // LocalStorage'dan kullanıcı bilgilerini kontrol et
+    const userStr = localStorage.getItem('user');
+    if (userStr) {
+      const userData = JSON.parse(userStr);
+      if (userData && !user) {
+        // AuthContext'i güncelle
+        updateUser(userData);
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    setIsAccountMenuOpen(false);
+  }, [location.pathname]);
+
   const cartCount = getCartCount();
 
   return (
@@ -84,7 +102,7 @@ const Header = () => {
             <button className="header-button" onClick={toggleAccountMenu}>
               <FontAwesomeIcon icon={faUser} className="button-icon" />
               <span className="button-text">
-                {user ? `${user.firstName} ${user.lastName}` : 'HESABIM'}
+                {user?.name || 'HESABIM'}
               </span>
               <FontAwesomeIcon icon={faChevronDown} className="chevron-icon" />
             </button>
@@ -93,12 +111,16 @@ const Header = () => {
                 {user ? (
                   <>
                     <div className="account-info">
-                      <span className="user-name">{user.firstName} {user.lastName}</span>
-                      <span className="user-email">{user.email}</span>
+                      <span className="user-name">{user?.name}</span>
+                      <span className="user-email">{user?.email}</span>
                     </div>
-                    <Link to="/profile" className="account-dropdown-item">
+                    <Link to="/profile/edit" className="account-dropdown-item">
                       <FontAwesomeIcon icon={faUser} className="dropdown-icon" />
                       <span>Bilgilerim</span>
+                    </Link>
+                    <Link to="/addresses" className="account-dropdown-item">
+                      <FontAwesomeIcon icon={faMapMarkerAlt} className="dropdown-icon" />
+                      <span>Adres Bilgilerim</span>
                     </Link>
                     <Link to="/orders" className="account-dropdown-item">
                       <FontAwesomeIcon icon={faClipboardList} className="dropdown-icon" />

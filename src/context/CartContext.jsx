@@ -19,7 +19,7 @@ export const CartProvider = ({ children }) => {
       if (user) {
         // Kullanıcı girişi varsa veritabanından sepeti çek
         const token = localStorage.getItem('token');
-        const response = await fetch(`http://localhost:5000/api/cart/${user.id}`, {
+        const response = await fetch(`http://192.168.50.33:5000/api/cart/${user.id}`, {
           headers: {
             'Authorization': `Bearer ${token}`
           }
@@ -63,13 +63,13 @@ export const CartProvider = ({ children }) => {
       if (user) {
         // Kullanıcı girişi varsa veritabanına da kaydet
         const token = localStorage.getItem('token');
-        const response = await fetch(`http://localhost:5000/api/cart/${user.id}`, {
-          method: 'POST',
+        const response = await fetch(`http://192.168.50.33:5000/api/cart/${user.id}`, {
+          method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
           },
-          body: JSON.stringify({ cart: newCart })
+          body: JSON.stringify(newCart)
         });
 
         if (!response.ok) {
@@ -131,7 +131,7 @@ export const CartProvider = ({ children }) => {
     if (user) {
       try {
         const token = localStorage.getItem('token');
-        await fetch(`http://localhost:5000/api/cart/${user.id}`, {
+        await fetch(`http://192.168.50.33:5000/api/cart/${user.id}`, {
           method: 'DELETE',
           headers: {
             'Authorization': `Bearer ${token}`

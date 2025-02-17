@@ -76,7 +76,9 @@ exports.login = async (req, res) => {
         id: user.UserID,
         firstName: user.FirstName,
         lastName: user.LastName,
-        email: user.Email
+        name: `${user.FirstName} ${user.LastName}`,
+        email: user.Email,
+        phone: user.Phone || ''
       }
     });
   } catch (error) {
